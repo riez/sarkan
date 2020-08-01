@@ -35,7 +35,7 @@ const tableProperties = {
     {
       key: "komoditas",
       name: "Komoditas",
-      placeholder: "Filter by Title",
+      placeholder: "Filter by Komoditas",
     },
     {
       key: "size",
