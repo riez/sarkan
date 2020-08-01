@@ -19,7 +19,7 @@ const Header: FunctionComponent<{}> = ({}) => {
       </div>
       <Container>
         <Navbar className={`${styles.navHeader}`}  collapseOnSelect expand="lg">
-          <Navbar.Brand href="#home">SARKAN</Navbar.Brand>
+          <Navbar.Brand href="/">SARKAN</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
             <Nav>

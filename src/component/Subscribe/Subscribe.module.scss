@@ -1,5 +1,5 @@
 .segment {
-  background: #4e5afe;
+  background: var(--cyan);
   padding: 2rem 1rem;
   border-radius: 0.5rem;
   margin: 0 4rem;
@@ -21,7 +21,7 @@
   border-radius: 1.5rem;
   padding: 0.5rem 1.5rem;
   background: #ffffff;
-  color: #4e5afe;
+  color: var(--cyan);
   font-size: 1rem;
   border: none;
   width: 100%;
@@ -29,7 +29,7 @@
 
 .inputText {
   color: white !important;
-  background: #4e5afe !important;
+  background: var(--cyan) !important;
   border: none !important;
   &::placeholder {
     color: white !important;
