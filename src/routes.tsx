@@ -1,5 +1,5 @@
-import route from 'next-routes';
-import { isSSR } from './utils';
+import route from "next-routes";
+import { isSSR } from "./utils";
 
 interface RouteType {
   name: string;
@@ -8,7 +8,9 @@ interface RouteType {
 }
 
 export const routes: RouteType[] = [
-  { name: 'home', page: 'index', pattern: '/' },
+  { name: "home", page: "index", pattern: "/" },
+  { name: "admin", page: "Admin", pattern: "/admin" },
+  { name: "add", page: "Add", pattern: "/admin/new-data" },
 ];
 
 const nextRoutes = new route();
