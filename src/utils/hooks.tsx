@@ -6,7 +6,7 @@ import { AreaModel } from "../models/area";
 
 export function mutateList(payload) {
   const key = "/api/post-list";
-  fetch(key, { method: "POST", body: JSON.stringify([payload]) });
+  return fetch(key, { method: "POST", body: JSON.stringify([payload]) });
 }
 
 export function useList(query) {
