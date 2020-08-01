@@ -1,30 +1,33 @@
 import { NextPage } from "next";
-import useSWR from "swr";
+import { useList, useSize, useArea, useCity } from "../utils/hooks";
+
+import Page from "../component/Page";
+import { Container } from "react-bootstrap";
+import Search from "../component/Search/Search";
+import Step from "../component/Step/Step";
+import Subscribe from "../component/Subscribe/Subscribe";
 
 const Homepage: NextPage<PageProps> = ({
   renderLoadingPage,
-  renderErrorPage
+  renderErrorPage,
 }) => {
-  const { data: dataList, error: errorList } = useSWR('/api/list');
-  const { data: dataOptionSize, error: errorOptionSize } = useSWR('/api/option_size');
-  const { data: dataOptionArea, error: errorOptionArea } = useSWR('/api/option_area');
-  let a = true;
-  
-  if(errorOptionSize || errorOptionArea || errorList){
+  const { data: dataCity, error: errorCity } = useCity();
+  const { data: dataSize, error: errorSize } = useSize();
+  if (errorCity || errorSize) {
     return renderErrorPage();
   }
-
-  if(!dataOptionSize || !dataOptionArea || !dataList){
+  if (!dataCity || !dataSize) {
     return renderLoadingPage();
   }
-
   return (
-   <div>
-    {JSON.stringify(dataList)}
-    {JSON.stringify(dataOptionSize)}
-    {JSON.stringify(dataOptionArea)}
-   </div>
-  )
-}
+    <Page>
+      <Container>
+        <Search dataCity={dataCity} dataSize={dataSize} />
+        <Step />
+        <Subscribe />
+      </Container>
+    </Page>
+  );
+};
 
 export default Homepage;
