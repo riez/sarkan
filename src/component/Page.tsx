@@ -1,17 +1,22 @@
 import { FunctionComponent } from "react";
+import Footer from "./Footer/Footer";
+import Header from "./Header/Header";
+import HeaderAdmin from "./Header/HeaderAdmin";
 
-interface Props{
+interface Props {
   children: React.ReactNode;
+  type?: "admin" | "user";
 }
 
-const Page: FunctionComponent<Props> = ({children}) => {
+const Page: FunctionComponent<Props> = (props) => {
+  const { children, type = "user" } = props;
   return (
     <div>
-      Header
+      {type === "user" ? <Header /> : <HeaderAdmin />}
       {children}
-      Footer
+      {type === 'user' && <Footer />}
     </div>
-  )
-}
+  );
+};
 
 export default Page;

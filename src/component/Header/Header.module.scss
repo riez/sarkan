@@ -1,0 +1,29 @@
+.headline{
+  background: #3D3D3D;
+  color: #FFFFFF;
+  .row {
+    margin: 0 !important;
+    .right {
+      text-align: right;
+    }
+  }
+}
+
+.navHeader{
+  background: #F5F7FB;
+  padding: 2rem 0 !important;
+}
+
+.navHeaderAdmin{
+  background: #3D3D3D;
+  .nav-link {
+    color: #FFFFFF !important;
+  }
+}
+
+.pageInfo {
+  background: #EFEFEF;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+  text-align: right;
+}
