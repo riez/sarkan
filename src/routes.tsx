@@ -11,6 +11,7 @@ export const routes: RouteType[] = [
   { name: "home", page: "index", pattern: "/" },
   { name: "admin", page: "Admin", pattern: "/admin" },
   { name: "add", page: "Add", pattern: "/admin/new-data" },
+  { name: "list", page: "List", pattern: "/list" },
 ];
 
 const nextRoutes = new route();
