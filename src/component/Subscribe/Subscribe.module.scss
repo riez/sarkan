@@ -1,0 +1,54 @@
+.segment {
+  background: #4e5afe;
+  padding: 2rem 1rem;
+  border-radius: 0.5rem;
+  margin: 0 4rem;
+}
+
+.alignCenter {
+  align-items: center;
+}
+
+.row {
+  padding: 0.5rem 1.5rem;
+}
+
+.column {
+  margin: 0.5rem 0;
+}
+
+.button {
+  border-radius: 1.5rem;
+  padding: 0.5rem 1.5rem;
+  background: #ffffff;
+  color: #4e5afe;
+  font-size: 1rem;
+  border: none;
+  width: 100%;
+}
+
+.inputText {
+  color: white !important;
+  background: #4e5afe !important;
+  border: none !important;
+  &::placeholder {
+    color: white !important;
+  }
+  &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+.textRight {
+  text-align: end;
+}
+
+.formGroup {
+  width: 100%;
+}
+
+.inboxIcon {
+  font-size: 1.5rem;
+  color: #ffffff;
+}
