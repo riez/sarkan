@@ -20,7 +20,7 @@ const Filter: FunctionComponent<Props> = (props) => {
     if (initialValue) {
       setState(initialValue.toString());
     }
-  });
+  }, []);
 
   const handleChange = useCallback(
     (e) => {
