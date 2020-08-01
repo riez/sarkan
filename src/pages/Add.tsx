@@ -3,11 +3,12 @@ import cls from "classnames";
 import dynamic from "next/dynamic";
 import { NextPage } from "next";
 import { v4 as uuidv4 } from "uuid";
-import { useCallback } from "react";
-import { Container, Row } from "react-bootstrap";
+import { useCallback, useState } from "react";
+import { Container, Row, Toast } from "react-bootstrap";
 
 import { useProvince, useCity, mutateList } from "../utils/hooks";
 import Page from "../component/Page";
+import { Router } from "../routes";
 
 const JsonToForm = dynamic(() => import("json-reactform"), {
   ssr: false,
@@ -19,6 +20,11 @@ const AddPage: NextPage<PageProps> = ({
 }) => {
   const { data: dataProvince, error: errorProvince } = useProvince();
   const { data: dataCity, error: errorCity } = useCity();
+  const [showToast, setShowToast] = useState(false);
+  const [toast, setToast] = useState({
+    status: "",
+    description: "",
+  });
 
   const provinceOptions =
     dataProvince?.map((item) => ({
@@ -66,21 +72,40 @@ const AddPage: NextPage<PageProps> = ({
     },
   };
 
-  const handleSubmit = useCallback((data) => {
-    const today = Date.now();
-    const payloads = {
-      uuid: uuidv4(),
-      komoditas: data["Komoditas"],
-      area_provinsi: data["Area Provinsi"].value,
-      area_kota: data["Area Kota"].value,
-      size: data["Size"],
-      price: data["Harga"],
-      tgl_parsed: new Date(today).toISOString(),
-      timestamp: today.toString(),
-    };
-    console.log(payloads);
-    mutateList(payloads);
+  const handleSubmit = useCallback(async (data) => {
+    try {
+      const today = Date.now();
+      const payloads = {
+        uuid: uuidv4(),
+        komoditas: data["Komoditas"],
+        area_provinsi: data["Area Provinsi"].value,
+        area_kota: data["Area Kota"].value,
+        size: data["Size"],
+        price: data["Harga"],
+        tgl_parsed: new Date(today).toISOString(),
+        timestamp: today.toString(),
+      };
+      const response = await mutateList(payloads);
+      if (response) {
+        setShowToast(true);
+        setToast({
+          status: "Success",
+          description: "New data has been added.",
+        });
+      }
+    } catch (error) {
+      setShowToast(true);
+      setToast({
+        status: "Failed",
+        description: "Could not add new data.",
+      });
+    }
   }, []);
+
+  const handleToast = useCallback(() => {
+    setShowToast(false);
+    Router.replaceRoute("/admin");
+  }, [])
 
   if (errorCity || errorProvince) {
     return renderErrorPage();
@@ -93,6 +118,23 @@ const AddPage: NextPage<PageProps> = ({
   return (
     <Page type="admin">
       <Container>
+      <Toast
+        onClose={handleToast}
+        show={showToast}
+        delay={3000}
+        autohide
+        style={{
+          position: 'absolute',
+          top: '1rem',
+          right: '1rem',
+        }}
+      >
+        <Toast.Header>
+          <strong className="mr-auto">{toast.status}</strong>
+          <small>just now</small>
+        </Toast.Header>
+        <Toast.Body>{toast.description}</Toast.Body>
+      </Toast>
         <div className={styles.segment}>
           <Row className={cls(styles.segmentTitle, styles.row)}>
             <strong>New</strong>&nbsp;Data List
@@ -103,6 +145,7 @@ const AddPage: NextPage<PageProps> = ({
           </Container>
         </div>
       </Container>
+      
     </Page>
   );
 };
