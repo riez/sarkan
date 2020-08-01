@@ -1,0 +1,58 @@
+.segment {
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 4rem 0;
+  .segmentTitle {
+    font-size: 1.5rem;
+  }
+}
+
+.noWrap {
+  flex-wrap: nowrap;
+}
+
+.row {
+  padding: 0.5rem 1.5rem;
+  align-items: center;
+}
+
+.button {
+  background: #4e5afe;
+  border-radius: 1.5rem;
+  padding: 0.5rem 1.5rem;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  width: 100%;
+}
+
+.textRight {
+  text-align: end;
+}
+
+.formGroup {
+  width: 100%;
+}
+
+.stepIcon {
+  font-size: 1.2rem;
+  color: var(--teal);
+}
+
+.stepNumber {
+  font-size: xx-large;
+  font-weight: bold;
+  color: #dbdbdb;
+}
+
+.stepTitle {
+  font-size: 1.1rem;
+  font-weight: bold;
+  line-height: 2rem;
+}
+
+.stepDescription {
+  font-size: 1rem;
+}
