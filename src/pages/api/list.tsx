@@ -12,6 +12,7 @@ export default async (req: Request, res: Response) => {
       sortField,
       sortDirection,
       searchQuery,
+      limit,
       ...search
     } = query;
     const response = await superagent.get(
@@ -47,6 +48,10 @@ export default async (req: Request, res: Response) => {
           item?.area_provinsi?.match(query) ||
           item?.area_kota?.match(query)
       );
+    }
+    if (limit) {
+      const temp = filteredResponse?.splice(0, limit);
+      filteredResponse = temp;
     }
     const pageSize = 10;
     const pagination = paginate(filteredResponse?.length, page, pageSize);
