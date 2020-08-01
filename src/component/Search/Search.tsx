@@ -1,10 +1,10 @@
 import styles from "./Search.module.scss";
-import { FunctionComponent, useCallback, useState } from "react";
+import { FunctionComponent, useCallback, useState, useEffect } from "react";
 import { Row, Col, Button, Form } from "react-bootstrap";
 import Select from "react-select";
 import { AreaModel } from "../../models/area";
 import { SizeModel } from "../../models/size";
-import { Router } from "../../routes";
+import { Router, getRouter } from "../../routes";
 import { serialize } from "../../utils";
 
 interface Props {
@@ -13,6 +13,8 @@ interface Props {
 }
 
 const Search: FunctionComponent<Props> = ({ dataCity, dataSize }) => {
+  const router = getRouter();
+  const currentQuery = router?.query || {};
   const cityOptions = dataCity?.map((item: AreaModel) => ({
     value: item.city,
     label: item.city,
@@ -22,14 +24,25 @@ const Search: FunctionComponent<Props> = ({ dataCity, dataSize }) => {
     label: item.size,
   }));
   const [city, setCity] = useState({ value: "", label: "Choose City" });
-  const [area, setArea] = useState({ value: "", label: "Choose Size" });
+  const [size, setSize] = useState({ value: "", label: "Choose Size" });
+  useEffect(() => {
+    const city = currentQuery?.area_kota;
+    const size = currentQuery?.size;
+    if (city) {
+      setCity({ value: city.toString(), label: city.toString() });
+    }
+    if (size) {
+      setSize({ value: size.toString(), label: size.toString() });
+    }
+  }, []);
+
   const handleSearch = useCallback(() => {
     const query = {
-      city: city.value,
-      area: area.value,
+      area_kota: city.value,
+      size: size.value,
     };
     Router.push(`/list?${serialize(query)}`);
-  }, [city, area]);
+  }, [city, size]);
   return (
     <div className={styles.segment}>
       <Row className={styles.row}>
@@ -38,7 +51,6 @@ const Search: FunctionComponent<Props> = ({ dataCity, dataSize }) => {
             <Form.Group className={styles.formGroup} controlId="location">
               <Form.Label>Find by City</Form.Label>
               <Select
-                id="city-options"
                 className={styles.formControl}
                 options={[{ value: "", label: "Choose City" }, ...cityOptions]}
                 value={city}
@@ -59,8 +71,8 @@ const Search: FunctionComponent<Props> = ({ dataCity, dataSize }) => {
                 id="size-options"
                 className={styles.formControl}
                 options={[{ value: "", label: "Choose Size" }, ...sizeOptions]}
-                value={area}
-                onChange={setArea}
+                value={size}
+                onChange={setSize}
               />
             </Form.Group>
           </Form.Row>
