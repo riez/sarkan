@@ -9,5 +9,12 @@ A website called Pasar Ikan which is the largest fish information center in the 
 - yarn
 - yarn dev
 
+### Docker
+- run docker-compose up inside work dir
+- thats all
+
+### Local
+http://{localhost/127.0.0.1}:9000
+
 ## Online Demo
 https://sarkan.herokuapp.com/
